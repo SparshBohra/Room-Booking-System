@@ -1,21 +1,20 @@
-package pkg214.project;
+package baby.pluto;
 
 /**
- *
- * @author sparshbohra
+ *  @author Baby Pluto
  */
 
 import java.sql.*;
 import javax.swing.JOptionPane;
 
 
-public class Project {
+public class connection {
     Connection conn;
     
     public static Connection ConnecrDb() {
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/sparshbohra/Desktop/214-project/RoomBooking.db");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:RoomBooking.db");
             return conn;
         }
         catch (Exception ex) {
