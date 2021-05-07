@@ -1,19 +1,28 @@
 package baby.pluto;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  * @author Jessica
  */
 
 public class StaffHomePage extends javax.swing.JFrame {
-
-    /**
-     * Creates new form StaffHomePage
-     */
+    Connection conn;
+    ResultSet rs;
+    PreparedStatement pst;
     
+    /*
+     *   Creates new form StaffHomePage
+     */
     public StaffHomePage() {
+        super("StaffHomePage");
         initComponents();
+        conn = connection.ConnecrDb();
+        
         getContentPane().setBackground(Color.WHITE);
     }
 
@@ -138,9 +147,36 @@ public class StaffHomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        setVisible(false);
-        StaffWelcomePage ob = new StaffWelcomePage();
-        ob.setVisible(true);
+        String sql = "select * from Staff where uow_id = ? and password = ?";
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, jTextField1.getText());
+            pst.setString(2, jPasswordField1.getText());
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                rs.close();
+                pst.close();
+                
+                setVisible(false);
+                StaffLoading ob = new StaffLoading();
+                ob.setUpLoading();
+                ob.setVisible(true);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Incorrect Id and Password");
+            }
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception ex) {
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

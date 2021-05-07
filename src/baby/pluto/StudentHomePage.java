@@ -1,19 +1,28 @@
 package baby.pluto;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  * @author Baby Pluto
  */
 
 public class StudentHomePage extends javax.swing.JFrame {
-
+    Connection conn;
+    ResultSet rs;
+    PreparedStatement pst;
+    
     /**
      * Creates new form StudentHomePage
      */
-    
     public StudentHomePage() {
+        super("StudentHomePage");
         initComponents();
+        conn = connection.ConnecrDb();
+        
         getContentPane().setBackground(Color.WHITE);
     }
 
@@ -139,9 +148,36 @@ public class StudentHomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        setVisible(false);
-        StudentWelcomePage ob = new StudentWelcomePage();
-        ob.setVisible(true);
+        String sql = "select * from Student where uow_id = ? and password = ?";
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, jTextField1.getText());
+            pst.setString(2, jPasswordField1.getText());
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                rs.close();
+                pst.close();
+                
+                setVisible(false);
+                StudentLoading ob = new StudentLoading();
+                ob.setUpLoading();
+                ob.setVisible(true);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Incorrect Id and Password");
+            }
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        finally {
+            try {
+                rs.close();
+                pst.close();
+            }
+            catch (Exception ex) {
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -170,10 +206,8 @@ public class StudentHomePage extends javax.swing.JFrame {
         }
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StaffHomePage().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new StudentHomePage().setVisible(true);
         });
         
         

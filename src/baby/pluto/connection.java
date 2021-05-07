@@ -14,7 +14,7 @@ public class connection {
     public static Connection ConnecrDb() {
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:RoomBooking.db");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/sparshbohra/Desktop/214/214-project/RoomBookingDatabase.db");
             return conn;
         }
         catch (Exception ex) {
