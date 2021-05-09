@@ -211,8 +211,6 @@ public class StudentHomePage extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             new StudentHomePage().setVisible(true);
         });
-        
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
