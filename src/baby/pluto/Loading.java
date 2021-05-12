@@ -4,9 +4,8 @@ import java.awt.Color;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author sparshbohra
+/*
+ * @author Baby Pluto
  */
 
 public class Loading extends javax.swing.JFrame implements Runnable{
@@ -28,6 +27,7 @@ public class Loading extends javax.swing.JFrame implements Runnable{
         th.start();
     }
     
+    @Override
     public void run() {
         try {
             for (int i=0; i<200; i++) {

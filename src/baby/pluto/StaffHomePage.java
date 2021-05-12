@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  * @author Jessica
@@ -24,6 +27,20 @@ public class StaffHomePage extends javax.swing.JFrame {
         conn = connection.ConnecrDb();
         
         getContentPane().setBackground(Color.WHITE);
+    }
+    
+    public void LoginTime() {
+        try {
+            String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+            String sql = "Insert into StaffLogin (uow_id, time) values (?,?)";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, jTextField1.getText());
+            pst.setString(2, timeStamp);
+            pst.execute();
+        }
+        catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -149,6 +166,8 @@ public class StaffHomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        LoginTime();
+        
         String sql = "select * from Staff where uow_id = ? and password = ?";
         try {
             pst = conn.prepareStatement(sql);

@@ -124,13 +124,12 @@ public class AdminLogin extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(259, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(17, 17, 17))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(256, 256, 256))))
+                .addComponent(jLabel1)
+                .addGap(256, 256, 256))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +153,6 @@ public class AdminLogin extends javax.swing.JFrame {
             pst.setString(1, jTextField1.getText());
             pst.setString(2, jPasswordField2.getText());
             rs = pst.executeQuery();
-            if (rs.next()) {
                 rs.close();
                 pst.close();
                 
@@ -162,10 +160,6 @@ public class AdminLogin extends javax.swing.JFrame {
                 Loading ob = new Loading();
                 ob.setUpLoading();
                 ob.setVisible(true);
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Incorrect Id and Access Code");
-            }
         }
         catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);

@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
- * @author Jessica
+ * @author Baby Pluto
  */
 
 public class BookPage extends javax.swing.JFrame {
