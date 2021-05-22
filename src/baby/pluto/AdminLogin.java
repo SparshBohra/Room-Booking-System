@@ -153,6 +153,7 @@ public class AdminLogin extends javax.swing.JFrame {
             pst.setString(1, jTextField1.getText());
             pst.setString(2, jPasswordField2.getText());
             rs = pst.executeQuery();
+            if (rs.next()) {   
                 rs.close();
                 pst.close();
                 
@@ -160,6 +161,10 @@ public class AdminLogin extends javax.swing.JFrame {
                 Loading ob = new Loading();
                 ob.setUpLoading();
                 ob.setVisible(true);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Incorrect Id and Password");
+            }
         }
         catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -201,6 +206,7 @@ public class AdminLogin extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new AdminLogin().setVisible(true);
             }

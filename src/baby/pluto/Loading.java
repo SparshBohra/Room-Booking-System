@@ -173,6 +173,7 @@ public class Loading extends javax.swing.JFrame implements Runnable{
         }
 
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Loading().setVisible(true);
             }
